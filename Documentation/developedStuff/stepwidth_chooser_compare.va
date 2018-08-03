@@ -1,0 +1,32 @@
+// VerilogA for HDL_lab, stepwidth_chooser_compare, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+// if out == 0 --> take the first stepwidth
+// if out == 1 --> take the second stepwidth
+// if out == 3 --> take the third stepwidth
+module stepwidth_chooser_compare(in1, in2, out);
+
+	input in1, in2;
+	output[1:0] out;
+	electrical in1, in2;
+	electrical[1:0] out;
+
+	analog begin
+		if (V(in1) > 0.9) begin
+			V(out[0]) <+ 0;
+			V(out[1]) <+ 0;
+		end
+		else if (V(in2) < 0.3) begin
+			V(out[0]) <+ 1.2;
+			V(out[1]) <+ 1.2;
+		end
+		else begin
+			V(out[0]) <+ 0;
+			V(out[1]) <+ 1.2;
+		end
+	end
+
+
+endmodule

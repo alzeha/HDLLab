@@ -1,0 +1,107 @@
+ 
+****************************************
+Report : area
+Design : digital_filter
+Version: N-2017.09-SP3
+Date   : Wed Aug  1 12:02:11 2018
+****************************************
+
+Library(s) Used:
+
+    uk65lscllmvbbh_108c125_wc (File: /cad/synopsys/libs/UMC_65_LL/synopsys/ccs/uk65lscllmvbbh_108c125_wc_ccs.db)
+    uk65lscllmvbbr_108c125_wc (File: /cad/synopsys/libs/UMC_65_LL/synopsys/ccs/uk65lscllmvbbr_108c125_wc_ccs.db)
+    uk65lscllmvbbl_108c125_wc (File: /cad/synopsys/libs/UMC_65_LL/synopsys/ccs/uk65lscllmvbbl_108c125_wc_ccs.db)
+
+Number of ports:                           50
+Number of nets:                          6520
+Number of cells:                         4064
+Number of combinational cells:           3753
+Number of sequential cells:               311
+Number of macros/black boxes:               0
+Number of buf/inv:                        691
+Number of references:                     134
+
+Combinational area:              22133.160084
+Buf/Inv area:                      868.320032
+Noncombinational area:            2142.360014
+Macro/Black Box area:                0.000000
+Net Interconnect area:           20178.398890
+
+Total cell area:                 24275.520098
+Total area:                      44453.918988
+1 
+
+
+
+
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : digital_filter
+Version: N-2017.09-SP3
+Date   : Wed Aug  1 12:02:11 2018
+****************************************
+
+Operating Conditions: uk65lscllmvbbh_108c125_wc   Library: uk65lscllmvbbh_108c125_wc
+Wire Load Model Mode: top
+
+  Startpoint: registers_reg_4__2_
+              (rising edge-triggered flip-flop clocked by CLOCK)
+  Endpoint: out_reg_reg_3_
+            (rising edge-triggered flip-flop clocked by CLOCK)
+  Path Group: CLOCK
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  digital_filter     wl10                  uk65lscllmvbbh_108c125_wc
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock CLOCK (rise edge)                  0.00       0.00
+  clock network delay (ideal)              0.00       0.00
+  registers_reg_4__2_/CK (DFQM8SA)         0.00       0.00 r
+  registers_reg_4__2_/Q (DFQM8SA)          0.29       0.29 r
+  U393/Z (BUFM4R)                          0.23       0.52 r
+  U340/S (ADHM1RA)                         0.33       0.85 r
+  U2843/S (ADFM1SA)                        0.56       1.41 f
+  U3392/Z (INVM1S)                         0.18       1.59 r
+  U2839/CO (ADFM2SA)                       0.34       1.93 r
+  U3427/CO (ADFM2SA)                       0.32       2.25 r
+  U3441/S (ADFM2SA)                        0.42       2.68 f
+  U1346/CO (ADFM2WA)                       0.20       2.87 f
+  U3442/Z (XOR2M2SA)                       0.29       3.16 r
+  U2950/Z (XOR2M2SA)                       0.33       3.49 f
+  U2023/Z (NR2M2R)                         0.16       3.65 r
+  U1205/Z (OAI21M3W)                       0.09       3.74 f
+  U3036/Z (AOI21M4R)                       0.11       3.85 r
+  U2775/Z (OAI21M4W)                       0.06       3.91 f
+  U1963/Z (AOI21M4W)                       0.10       4.01 r
+  U1171/Z (OAI21M4W)                       0.06       4.07 f
+  U1169/Z (AOI21M4W)                       0.09       4.16 r
+  U634/Z (OAI21M4W)                        0.07       4.23 f
+  U784/Z (AOI21M8W)                        0.10       4.33 r
+  U105/Z (INVM4R)                          0.09       4.42 f
+  U1159/Z (AN2M4R)                         0.11       4.54 f
+  U632/Z (OR2M4R)                          0.11       4.65 f
+  U554/Z (XNR2M2RA)                        0.15       4.80 r
+  U75/Z (AO22M2W)                          0.12       4.91 r
+  out_reg_reg_3_/D (DFQM1SA)               0.00       4.91 r
+  data arrival time                                   4.91
+
+  clock CLOCK (rise edge)                  5.00       5.00
+  clock network delay (ideal)              0.00       5.00
+  clock uncertainty                       -0.03       4.97
+  out_reg_reg_3_/CK (DFQM1SA)              0.00       4.97 r
+  library setup time                      -0.06       4.91
+  data required time                                  4.91
+  -----------------------------------------------------------
+  data required time                                  4.91
+  data arrival time                                  -4.91
+  -----------------------------------------------------------
+  slack (MET)                                         0.00
+
+
+1

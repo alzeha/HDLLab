@@ -1,0 +1,119 @@
+ 
+****************************************
+Report : area
+Design : digital_filter
+Version: N-2017.09-SP3
+Date   : Wed Aug  1 10:50:52 2018
+****************************************
+
+Library(s) Used:
+
+    uk65lscllmvbbh_108c125_wc (File: /cad/synopsys/libs/UMC_65_LL/synopsys/ccs/uk65lscllmvbbh_108c125_wc_ccs.db)
+    uk65lscllmvbbr_108c125_wc (File: /cad/synopsys/libs/UMC_65_LL/synopsys/ccs/uk65lscllmvbbr_108c125_wc_ccs.db)
+    uk65lscllmvbbl_108c125_wc (File: /cad/synopsys/libs/UMC_65_LL/synopsys/ccs/uk65lscllmvbbl_108c125_wc_ccs.db)
+
+Number of ports:                           50
+Number of nets:                          6190
+Number of cells:                         3504
+Number of combinational cells:           3212
+Number of sequential cells:               292
+Number of macros/black boxes:               0
+Number of buf/inv:                        451
+Number of references:                      60
+
+Combinational area:              21175.920071
+Buf/Inv area:                      496.080020
+Noncombinational area:            2149.920003
+Macro/Black Box area:                0.000000
+Net Interconnect area:           18323.048641
+
+Total cell area:                 23325.840074
+Total area:                      41648.888715
+1
+
+
+
+
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : digital_filter
+Version: N-2017.09-SP3
+Date   : Wed Aug  1 10:50:52 2018
+****************************************
+
+Operating Conditions: uk65lscllmvbbh_108c125_wc   Library: uk65lscllmvbbh_108c125_wc
+Wire Load Model Mode: top
+
+  Startpoint: registers_reg_9__1_
+              (rising edge-triggered flip-flop clocked by CLOCK)
+  Endpoint: out_reg_reg_23_
+            (rising edge-triggered flip-flop clocked by CLOCK)
+  Path Group: CLOCK
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  digital_filter     wl10                  uk65lscllmvbbh_108c125_wc
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock CLOCK (rise edge)                  0.00       0.00
+  clock network delay (ideal)              0.00       0.00
+  registers_reg_9__1_/CK (DFQM4SA)         0.00       0.00 r
+  registers_reg_9__1_/Q (DFQM4SA)          0.65       0.65 f
+  U111/Z (INVM2R)                          0.55       1.20 r
+  U2901/S (ADHM1SA)                        0.49       1.69 r
+  U2906/CO (ADFM2SA)                       0.34       2.02 r
+  U810/CO (ADFM1SA)                        0.39       2.42 r
+  U898/CO (ADFM1SA)                        0.40       2.81 r
+  U1059/S (ADFM1SA)                        0.58       3.40 f
+  U1466/S (ADFM1SA)                        0.51       3.91 r
+  U1465/S (ADFM1SA)                        0.57       4.48 f
+  U1915/Z (NR2M1S)                         0.26       4.73 r
+  U2925/Z (OAI21M2S)                       0.26       5.00 f
+  U205/Z (AOI21M2S)                        0.22       5.22 r
+  U2358/Z (OAI21M1S)                       0.26       5.47 f
+  U259/Z (AOI21M2S)                        0.25       5.72 r
+  U2927/Z (OAI21M2S)                       0.22       5.94 f
+  U195/Z (AOI21M2S)                        0.24       6.18 r
+  U130/Z (OAI21M2S)                        0.23       6.41 f
+  U194/Z (AOI21M2S)                        0.22       6.63 r
+  U252/Z (OAI21M1R)                        0.15       6.79 f
+  U78/Z (AOI21M2R)                         0.24       7.03 r
+  U193/Z (OAI21M2R)                        0.20       7.23 f
+  U138/Z (AOI21M2R)                        0.27       7.50 r
+  U251/Z (OAI21M4R)                        0.16       7.66 f
+  U191/Z (AOI21M4R)                        0.16       7.82 r
+  U190/Z (OAI21M4R)                        0.13       7.95 f
+  U189/Z (AOI21M4R)                        0.16       8.11 r
+  U188/Z (OAI21M4R)                        0.13       8.24 f
+  U134/Z (AOI21M4R)                        0.16       8.40 r
+  U131/Z (OAI21M2R)                        0.18       8.57 f
+  U245/Z (AOI21M4R)                        0.19       8.76 r
+  U420/Z (OAI21M4R)                        0.13       8.88 f
+  U187/Z (AOI21M4R)                        0.17       9.05 r
+  U186/Z (OAI21M4R)                        0.13       9.18 f
+  U185/Z (AOI21M4R)                        0.16       9.33 r
+  U244/Z (OAI21M2R)                        0.12       9.46 f
+  U417/Z (XNR2M2SA)                        0.27       9.73 r
+  U184/Z (AO22M1RA)                        0.17       9.90 r
+  out_reg_reg_23_/D (DFQM1SA)              0.00       9.90 r
+  data arrival time                                   9.90
+
+  clock CLOCK (rise edge)                 10.00      10.00
+  clock network delay (ideal)              0.00      10.00
+  clock uncertainty                       -0.03       9.97
+  out_reg_reg_23_/CK (DFQM1SA)             0.00       9.97 r
+  library setup time                      -0.07       9.90
+  data required time                                  9.90
+  -----------------------------------------------------------
+  data required time                                  9.90
+  data arrival time                                  -9.90
+  -----------------------------------------------------------
+  slack (MET)                                         0.00
+
+
+1

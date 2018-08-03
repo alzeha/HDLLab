@@ -1,0 +1,23 @@
+// VerilogA for HDL_lab, analog_signal_sub, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module analog_signal_sub(in1, in2, out);
+
+	input in1, in2;
+	output out;
+	electrical in1, in2, out;
+
+	analog begin
+		
+		if(V(in1) - V(in2) > 0) begin
+			V(out) <+ V(in1) - V(in2);
+		end
+		else begin
+			V(out) <+ V(in2) - V(in1);
+		end
+
+	end
+
+endmodule

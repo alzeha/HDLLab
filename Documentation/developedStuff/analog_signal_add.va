@@ -1,0 +1,21 @@
+// VerilogA for HDL_lab, analog_signal_add, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module analog_signal_add(in_1, in_2, addnotsub, out);
+
+	parameter real VREF = 0.6; 
+
+	input in_1, in_2, addnotsub;
+	output out;
+	electrical in_1, in_2, addnotsub, out;
+
+	analog begin
+		if(V(addnotsub) >= VREF)
+			V(out) <+ (V(in_1) + V(in_2)) > V(addnotsub) ? V(addnotsub) : (V(in_1) + V(in_2));
+		else
+			V(out) <+ (V(in_1) - V(in_2)) < V(addnotsub) ? V(addnotsub) : (V(in_1) - V(in_2));
+	end
+
+endmodule

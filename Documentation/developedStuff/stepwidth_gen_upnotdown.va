@@ -1,0 +1,23 @@
+// VerilogA for HDL_lab, stepwidth_gen_upnotdown, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module stepwidth_gen_upnotdown(Vactual, Vsignal, out);
+
+	input Vactual, Vsignal;
+	output out;
+	electrical Vactual, Vsignal, out;
+
+	analog begin
+
+		V(out) <+ (V(Vactual) > V(Vsignal)) ? 0 : 1.2;
+/*		if (V(Vactual) > V(Vsignal)) begin
+			V(out) <+ 0;
+		end
+		else begin
+			V(out) <+ 1.2;
+		end
+*/	end
+
+endmodule

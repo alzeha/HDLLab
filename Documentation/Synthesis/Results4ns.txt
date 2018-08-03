@@ -1,0 +1,103 @@
+ 
+****************************************
+Report : area
+Design : digital_filter
+Version: N-2017.09-SP3
+Date   : Wed Aug  1 12:07:34 2018
+****************************************
+
+Library(s) Used:
+
+    uk65lscllmvbbh_108c125_wc (File: /cad/synopsys/libs/UMC_65_LL/synopsys/ccs/uk65lscllmvbbh_108c125_wc_ccs.db)
+    uk65lscllmvbbr_108c125_wc (File: /cad/synopsys/libs/UMC_65_LL/synopsys/ccs/uk65lscllmvbbr_108c125_wc_ccs.db)
+    uk65lscllmvbbl_108c125_wc (File: /cad/synopsys/libs/UMC_65_LL/synopsys/ccs/uk65lscllmvbbl_108c125_wc_ccs.db)
+
+Number of ports:                           50
+Number of nets:                          6526
+Number of cells:                         4065
+Number of combinational cells:           3760
+Number of sequential cells:               305
+Number of macros/black boxes:               0
+Number of buf/inv:                        719
+Number of references:                     147
+
+Combinational area:              22349.160089
+Buf/Inv area:                      979.920034
+Noncombinational area:            2139.480006
+Macro/Black Box area:                0.000000
+Net Interconnect area:           20153.009887
+
+Total cell area:                 24488.640096
+Total area:                      44641.649983
+1
+
+
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : digital_filter
+Version: N-2017.09-SP3
+Date   : Wed Aug  1 12:07:34 2018
+****************************************
+
+Operating Conditions: uk65lscllmvbbh_108c125_wc   Library: uk65lscllmvbbh_108c125_wc
+Wire Load Model Mode: top
+
+  Startpoint: registers_reg_4__1_
+              (rising edge-triggered flip-flop clocked by CLOCK)
+  Endpoint: out_reg_reg_17_
+            (rising edge-triggered flip-flop clocked by CLOCK)
+  Path Group: CLOCK
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  digital_filter     wl10                  uk65lscllmvbbh_108c125_wc
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock CLOCK (rise edge)                  0.00       0.00
+  clock network delay (ideal)              0.00       0.00
+  registers_reg_4__1_/CK (DFQM4RA)         0.00       0.00 r
+  registers_reg_4__1_/Q (DFQM4RA)          0.43       0.43 r
+  U489/Z (INVM6R)                          0.21       0.64 f
+  U253/ICO (AD42M2WA)                      0.23       0.87 f
+  U226/S (AD42M2WA)                        0.16       1.03 r
+  U576/CO (AD42M2SA)                       0.79       1.82 f
+  U1351/Z (INVM2R)                         0.10       1.92 r
+  U3474/CO (ADFM2WA)                       0.16       2.07 r
+  U3473/S (ADFM2WA)                        0.22       2.30 f
+  U3323/S (ADFM2WA)                        0.23       2.52 r
+  U3395/CO (ADFM2WA)                       0.15       2.67 r
+  U3250/CO (ADFM2WA)                       0.20       2.87 r
+  U1743/Z (ND2B1M2W)                       0.12       2.99 r
+  U653/Z (ND2M4R)                          0.07       3.06 f
+  U1238/Z (ND2M6R)                         0.07       3.13 r
+  U645/Z (NR2M6R)                          0.06       3.19 f
+  U644/Z (NR2M6R)                          0.12       3.32 r
+  U1221/Z (ND2M6W)                         0.10       3.41 f
+  U747/Z (INVM4R)                          0.10       3.52 r
+  U1213/Z (ND2M2R)                         0.10       3.62 f
+  U2102/Z (OAI21M4W)                       0.11       3.72 r
+  U92/Z (XOR2M2RA)                         0.13       3.85 r
+  U744/Z (AO21M4WA)                        0.09       3.94 r
+  out_reg_reg_17_/D (DFQM2SA)              0.00       3.94 r
+  data arrival time                                   3.94
+
+  clock CLOCK (rise edge)                  4.00       4.00
+  clock network delay (ideal)              0.00       4.00
+  clock uncertainty                       -0.03       3.97
+  out_reg_reg_17_/CK (DFQM2SA)             0.00       3.97 r
+  library setup time                      -0.03       3.94
+  data required time                                  3.94
+  -----------------------------------------------------------
+  data required time                                  3.94
+  data arrival time                                  -3.94
+  -----------------------------------------------------------
+  slack (MET)                                         0.00
+
+
+1

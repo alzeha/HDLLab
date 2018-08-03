@@ -1,0 +1,43 @@
+// VerilogA for HDL_lab, mux_two_input, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module mux_two_input(sel, in1, in2, in3, in4, out);
+
+	input[15:0] in1, in2, in3, in4;
+	input[1:0] sel;
+	output[15:0] out;
+	electrical[15:0] in1, in2, in3, in4, out;
+	electrical[1:0] sel;
+
+	genvar i;
+	analog begin
+		if(V(sel[0]) == 0) begin
+			if (V(sel[1]) == 0) begin
+				for(i = 0; i<16; i = i+1) begin
+					V(out[i]) <+ V(in1[i]);
+				end
+			end
+			else begin
+				for(i = 0; i<16; i = i+1) begin
+					V(out[i]) <+ V(in2[i]);
+				end
+			end
+		end
+		else begin
+			if (V(sel[1]) == 0) begin
+				for(i = 0; i<16; i = i+1) begin
+					V(out[i]) <+ V(in3[i]);
+				end
+			end
+			else begin
+				for(i = 0; i<16; i = i+1) begin
+					V(out[i]) <+ V(in4[i]);
+				end
+			end
+		end
+	end
+
+
+endmodule

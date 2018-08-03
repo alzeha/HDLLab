@@ -1,0 +1,16 @@
+// VerilogA for HDL_lab, simpleADC, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module simpleADCExtended(in, out, en);
+
+	input in;
+	output out, en;
+	electrical in, out, en;
+
+	analog begin
+		V(out) <+ (V(in) > 0.6) ? 1.2 : 0;
+		V(en) <+ (0.3 < V(in) && V(in) < 0.9) ? 0 : 1.2;
+	end
+endmodule

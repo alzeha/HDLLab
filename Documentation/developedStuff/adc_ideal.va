@@ -1,0 +1,33 @@
+// VerilogA for HDL_lab, adc_ideal, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module adc_ideal(clk, in, out);
+
+	input clk, in;
+	output [23:0] out;
+	electrical clk, in; 
+	electrical [23:0]out;
+
+	parameter real VREF = 1.2;
+	integer helper, helper2;
+	genvar i;
+	analog begin: label
+		@(cross(V(clk)-0.6, 1)) begin
+			helper = V(in)/VREF * (1<<25 - 1);
+		end
+
+		helper2 = helper;
+
+		for(i = 23; i>=0; i=i-1) begin
+			V(out[i]) <+ (helper2 >= (1 << i)) ? 1.2 : 0;
+			if (helper2 >= (1 << i)) begin
+				helper2 = helper2 - (1 << i);
+			end
+		end
+
+
+	end
+
+endmodule

@@ -1,0 +1,17 @@
+// VerilogA for HDL_lab, analog_signal_add_without_limit, veriloga
+
+`include "constants.vams"
+`include "disciplines.vams"
+
+module analog_signal_add_without_limit(in_1, in_2, out);
+
+	input in_1, in_2;
+	output out;
+	electrical in_1, in_2, out;
+
+	analog begin
+		V(out) <+ V(in_1) + V(in_2);
+	end
+
+
+endmodule
