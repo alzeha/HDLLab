@@ -1,0 +1,1 @@
+Unser Filter verschafft dem WAV einen Offset... Warum? Keine Ahnung.

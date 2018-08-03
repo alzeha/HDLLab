@@ -1,0 +1,11 @@
+Idee: Forward Path, Rückkopplung über DAC, Vergleichen, korrigieren.
+
+
+Forward Path 1:
+
+Der Vergleich zwischen dem aktuellen (ausgebenen) Wert und dem Signaleingang entscheidet darüber, ob hoch- oder heruntergezählt wird (I1)
+
+Wenn I1 hochzählen möchte, aber das Erhöhen des Digitalwertes dazu führt, dass sich der ausgegebene Wert vom Signalwert entfernt (also zu weit nach oben ginge), dann soll nicht gezählt werden. Dies wird über I4 getestet, indem das Signal mit dem ausgegebenen Wert + eine halbe Stufe verglichen wird.
+
+Wenn I1 herunterzählen möchte, aber das Erniedrigen des Digitalwertes dazu führt, dass sich der ausgegebene Wert vom Signalwert entfernt (also zu weit nach unten ginge), dann soll nicht gezählt werden. Dies wird über I7 getestet, indem das Signal mit dem ausgegebenen Wert - eine halbe Stufe verglichen wird.
+

@@ -1,0 +1,14 @@
+Virtuoso: 
+
+Neue lib erstellt, attach to an exisiting lib umc65ll
+
+Dann Zelle "OpAmp" in neuer lib erstellt. In dieser Zelle wurde dann das Beispiel aus dem Skript nachgebaut. (beide in einer Zelle)
+
+Anschließend haben wir das Schematic dazu erstellt. Dies ist allerdings ein viereckiger Kasten, besser wäre ein Dreieck gewesen.
+
+Das Simulationsergebnis ist auf dem Arbeitsrechner unter ~/Documents/Documentation/Task1OpAmpSimulation.png gespeichert.
+
+Für Modelsim ist das Simulationsergebnis unter ~/Documents/Documentation/Task2ClkGenSimulation.png gespeichert.
+
+Zunächst bauten wir den DAC aus einem PWM und einem Tiefpassfilter. Verschiedene Berechnungsprobleme führten dann dazu, dass wir beim Betreuer nachfragten, ob das wirklich so aufwendig ist. Dieser meinte, es ginge deutlich einfacher, die Lösung ist nun folgende...
+DAC Verilog A code liegt unter ~/Documents/Documentation

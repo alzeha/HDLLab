@@ -1,0 +1,33 @@
+Wir haben den FIR Filter mit der Window-Methode berechnet.
+
+Die Impuls Antwort eines idealen TP ist bekanntermaßen
+h(n) = B*sinc(Bn) ( = B * sin(PI*B*n)/PI*B*n ) (B = 2*f_grenz)
+
+Gesucht wird nun eine Window-Funktion, sodass w(n)*h(n) eine realisierbare Funktion ergibt. (Der ideale TP ist nicht realisierbar, da nicht kausal und nicht endlich).
+
+Damit die Impulstantwort endlich wird, wird ein N gesucht, sodass alle |n|>N vernachlässigt werden können.
+
+Hieraus folgt w(n) = 0 für alle |n| > N. Das Setzen von w(n) = 1 für alle |n| <= N ist bereits eine mögliche Window-Function. Allerdings werden nun Eingänge aus der Zukunft benötigt (Filter ist nicht kausal), weshalb noch ein Time Shift implementiert werden muss. (Wichtig, solche Window-Functions brauchen eine geradzahlige Ordnung)
+
+Anschließend spezifizieren wir unsere Impulsantwort im Frequenzbereich. Unsere normalisierte Grenzfrequenz wäre 11025Hz/44100Hz = 1/4.
+H(omega) = 1 für |omega| <= 0.5Pi, H(omega) = 0 sonst
+
+Nun berechnen wir die idealen Filter Koeffizienten h_d, indem die Inverse Diskrete Fourier Transformation auf die Impulsanwort angewendet wird:
+
+h_d*(n) = 1/{2PI} * int{H(omega) * e^(j*omega*n) domega} = 1/{2PI} * int_from(-0.5pi)_to(0.5pi){e^(j*omega*n) domega}
+
+
+
+=> h_d*(n) = 0.5*(sin(0.5*Pi*n)/(0.5*pi*n))
+
+mit delay:
+
+h_d(n) = h_d*(n-N)
+
+
+
+
+
+
+
+
