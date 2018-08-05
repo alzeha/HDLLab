@@ -1,58 +1,98 @@
-\documentclass[a4paper, 10pt]{scrartcl}
+\documentclass[parskip,
+oneside,
+% 							 longdoc,
+11pt,
+noheadingspace,
+accentcolor=tud1d,
+bigchapter,
+%draft,
+colorback]{tudreport}
 
-\usepackage[utf8]{inputenc}
-\usepackage[ngerman]{babel}
-\usepackage[T1]{fontenc}
-\usepackage{amsmath}
+
+%% Spracheinstellungen
+\usepackage[english]{babel}
+%\usepackage[applemac]{inputenc} % Input-Encodung: applemac fuer Mac
+%\IfFileExists{latin1.sty}{\usepackage{latin1}}{\usepackage{isolatin1}}
+%\usepackage[latin1]{inputenc}
+%\usepackage[T1]{fontenc}
+\usepackage[ansinew]{inputenc}  % Input-Encodung: ansinew fuer Windows
+\usepackage{microtype} % optischer Randausgleich bei pdflatex mit Zeichendehnung
 \usepackage{listings}
-\usepackage{graphicx}
-\usepackage{color}
+
+%% Grafikeinstellungen
+\usepackage{float} % u.a. genaue Plazierung von Gleitobjekten mit H
+%\usepackage[latin1]{inputenc}
+
+
+%% Tabelleneinstellungen
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{tabularx}
+
+%% State Chart
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+
+%% Mathematik
+\usepackage{amsmath}
+\usepackage{nicefrac}
+\usepackage{icomma}
+
+%% sonstige Einstellungen
+\usepackage{paralist}% erweiterte Listenumgebung (z.B. compactitem)
+\usepackage{textcomp} % verschiedene Symbole
+\usepackage[nottoc, numbib]{tocbibind}
 \usepackage{hyperref}
-\usepackage{verbatim}
+\renewcommand\plparsep{1ex}
+\usepackage{enumerate}
+\usepackage{xcolor,colortbl}
+\usepackage{subfig}
 
+\definecolor{Blue}{HTML}{9DBBE6}
+\definecolor{Green}{HTML}{bfff00}
 
-\lstset{language=bash,
-  backgroundcolor=\color{pgrey},
-  showspaces=false,
-  showtabs=false,
-  breaklines=true,
-  showstringspaces=false,
-  breakatwhitespace=true,
-  commentstyle=\color{pgreen},
-  keywordstyle=\color{pblue},
-  stringstyle=\color{pred},
-  basicstyle=\ttfamily,
-  moredelim=[il][\textcolor{pgrey}]{$ $},
-  moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%},
-}
-
-\title{Report HDL Lab}
-\subtitle{SoSe 18}
-\author{Blandine Rivière, Alexander Lieb}
-\date{03.08.2018}
+\title{\textbf{HDL Lab\\Report}}
+\subtitle{Group 4\\
+	Alexander Lieb - .......\\
+	Blandine Riviere - 2238618}
+\subsubtitle{Supervisor: Dominic Korner\hfill \\Computer Engineering Institute\hfill\textbar\hfill Integrated Electronics Systems\hfill\textbar\hfill Prof.\,Dr.-Ing.\, Klaus Hofmann}
+\setinstitutionlogo{images/General/ies.pdf}
 
 \begin{document}
-
-\maketitle
-
-\newpage
-
-\tableofcontents
-
-\newpage
-
-\include{firstTwoTask}
-
-\newpage
-
-\include{introduction}
-
-\newpage
-
-\include{adc}
-
-\newpage
-
-\include{filter}
-
+	
+	%% Titel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\maketitle
+	\cleardoublepage
+	
+	%% Vorgeplnkel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\pagestyle{empty}
+	
+	%% Hauptteil %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\pagestyle{headings}
+	\pagenumbering{arabic}
+	
+	\tableofcontents
+	
+	\newpage
+	
+	\include{introduction}
+	
+	\newpage
+	
+	\include{firstTwoTask}
+	
+	\newpage
+	
+	\include{adc}
+	
+	\newpage
+	
+	\include{filter}
+	
+	\newpage
+	
+	\include{fullCircuit}
+	
 \end{document}
