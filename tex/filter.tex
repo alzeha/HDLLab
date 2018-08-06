@@ -6,8 +6,42 @@ The goal of this lab is to digitally filter a waveform sampled at 44.1kHz and do
 \[ F \le F_N = \frac{F_{sampling}}{2} \] 
 Thus, all frequencies higher than $ F_N = 11.025$ kHz have to be filtered out by a low pass filter.\\
 \\
-As it is known, an ideal low pass filter is defined by its impulsional response: 
-\[ h(n) = B*sinc(Bn) = B * \frac{sin(\pi*B*n)}{\pi*B*n} \] where \[B = 2*f_{cut}\]
+As it is known, an ideal low pass filter is defined by its impulse response: 
+\[ h(n) = B*sinc(Bn) = B * \frac{sin(\pi Bn)}{\pi Bn} \] where \[B = 2*f_{cutoff}\]
+This filter is however neither causal nor finite, and therefore not feasible. To overcome this problem, it is necessary to find a window $w(n)$, such that $h(n)*w(n)$ is finite and causal. In our case, the choice is made to use the rectangle window, for reasons of simplicity : \[ w(n) = \left\{
+\begin{array}{ll}
+1 & \mbox{if } \vert n \vert  \le N\\
+0 & \mbox{otherwise}
+\end{array}
+\right. \]
+where $N$ is the filter order. It is noteworthy that the order $N$ must be even. A time shift has also to be added, in order to make $h(n)*w(n)$ causal. \\
+The resulting impulse response in frequency domain is given by the following formula:
+\[
+H(\omega) = \left\{ 
+	\begin{array}{ll}
+	1 & \mbox{if } \vert \omega \vert \le 2 \pi f_{cutoff} = \frac{\pi}{2}\\
+	0 & otherwise
+	\end{array}
+	\right.
+\]
+where the normalized cutoff frequency is \[f_{cutoff} = \frac{11025}{44100} = \frac{1}{4}\]
+This allows to compute the ideal filter cofficients, which correspond to the inverse discrete Fourier transform of the impulse response:
+\[
+h_d^*(n) = \frac{1}{2\pi} \int H(\omega) e^{j\omega n} d\omega = \frac{1}{2\pi} \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} e^{j \omega n} d\omega = \frac{\pi}{2}  \frac{sin(\frac{\pi}{2} n)}{\frac{\pi}{2} n}
+\]
+Finally, the formula adopted for the implementation of the digital filter is as follows:
+
+\[
+h(n) = \sum_{k=0}^{N} h_d(k) x(n-k)
+\]
+
+where
+
+\[
+h_d(n) = h_d^*(n-N) = \frac{\pi}{2} sinc(\frac{\pi}{2} (n-N))
+\]
+
+The implemented filter can be found in the Verilog module \texttt{digital\_filter}. The order can be passed as parameter, so that the coefficients can be comuted accordingly. Initially, the cutoff frequency could also be set as parameter of type \texttt{real}. However, this data type is not supported by the synthesis. That is the reason why this parameter was removed and directly included in the coefficients calculation. The same goes for the coefficients which cannot be once computed and stored as \texttt{real}, and therefore need to be recomputing for each sample.
 
 \section{Evaluation}
 
@@ -24,12 +58,12 @@ The design is first evaluated in MATLAB, to check if the chosen architecture mee
 	\label{fig:filterMatlabTestbench}%
 \end{figure}
 
-As expected, the chosen filter has a low pass behavior with a cut frequency $F_c = 11.025 kHz$.
+As expected, the chosen filter has a low pass behavior with a cutoff frequency $F_c = 11.025 kHz$.
 
-\subsection{Filter evaluation}
+\subsection{Verilog implementation}
 
 To evaluate the performance of the digital filter implemented in Verilog, a simulation is performed in Cadence. The testbench used for this purpose is to be found in \texttt{digital\_filter\_Testbench2}, and the corresponding schematic is provided in figure \ref{fig:filterTestbench}. it consists of a sum of sinus waveforms of 500Hz and 20 kHz respectively. For this simulation, an ideal ADC \texttt{adc\_ideal} has been additionally implemented, to convert the analog input signal to a digital one before filtering. The values for the different parameters are given in the table \ref{table:filterTestbench}. The order of the filter is deliberately small, in order to prevent a too important delay.\\
-The obtained transient waveforms and spectrums are provided respectively in figures \ref{fig:filterCadenceTestbenchTransient} and \ref{fig:filterCadenceTestbenchSpectrum}.
+The obtained transient waveforms and spectrums are provided respectively in figures \ref{fig:filterCadenceTestbenchTransient} and \ref{fig:filterCadenceTestbenchSpectrum}. The ENOB, SINAD and SNR values are listed in the table \ref{table:filterValues}.
  
 
 \begin{figure}[!h]
@@ -66,7 +100,23 @@ The obtained transient waveforms and spectrums are provided respectively in figu
 	\label{fig:filterCadenceTestbenchSpectrum}
 \end{figure} 
 
-Surprisingly, the filtered signal contains more noise as the input signal. This may be due to the ADC which is working only at 44.1 kHz and may not capture the whole complexity of the input signal. Moreover, the relatively small order does not allow the filter to have a sharp cut of the higher frequencies.
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{|l|r|}
+		\hline
+		ENOB & -0.06092 bits \\
+		\hline
+		SINAD & 1.3963 dB \\
+		\hline
+		SNR & 1.3963 dB \\
+		\hline
+	\end{tabular}
+	\caption{Filter statistics}
+	\label{table:filterValues}
+\end{table}
+
+Surprisingly, the filtered signal contains more noise as the input signal. This may be due to the ADC which is working only at 44.1 kHz and may not capture the whole complexity of the input signal. Moreover, the relatively small order does not allow the filter to have a sharp cutoff of the higher frequencies.
+
 
 \section{Synthesis}
 
