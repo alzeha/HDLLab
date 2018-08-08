@@ -1,12 +1,12 @@
 \chapter{Downsampling circuit}
 
-After implementing the digital filter and the Analog-Digital and Digital Analog converters, all components can be integrated together in a downsampling circuit for WAV signals. The corresponding results are described in this chapter.
+After implementing the digital filter and the Analog-Digital and Digital Analog converters, all components got integrated together in a downsampling circuit for WAV signals. The corresponding results are described in this chapter.
 
 \section{Simple downsampling circuit}
 
 The downsampling circuit is composed of the digital filter combined with a register, which can be found in the Verilog module \texttt{downsampling}. The task of this register is to keep only every second sample provided by the filter, in order to reduce the sampling frequency from 44.1 kHz to 22.05 kHz.\\
 \\
-To be able to simulate the design with WAV audio signals, additional components such as a WAV reader and a WAV writer are required. Both corresponding cell views are to be found respectively in the modules \texttt{WAV\_Reader} and \texttt{WAV\_Writer}. As the read/written signals are encoded on 24 bits, as well as the filter and downsampling circuit, the connection between the 16-bit ADC and the other components is performed by a converter 24 to 16 bits (respectively 16 to 24 bits), which discards the eigth MSBs (respectively set the eight MSBs to zero). The corresponding modules are to be found respectively in \texttt{converterToDAC} and \texttt{converterFromADC}. 
+To be able to simulate the design with WAV audio signals, additional components such as a WAV reader and a WAV writer are required. Both corresponding cell views can be found respectively in the modules \texttt{WAV\_Reader} and \texttt{WAV\_Writer}. As the read/written signals are encoded on 24 bits, as well as the filter and downsampling circuit, the connection between the 16-bit ADC and the other components is performed by a converter 24 to 16 bits (respectively 16 to 24 bits), which discards the eigth MSBs (respectively set the eight MSBs to zero). Due to the fact, that the WAV Reader and Writer only support the 16-bit WAV version, this conversion can be made without any loss of information. The corresponding modules cam be found respectively in \texttt{converterToDAC} and \texttt{converterFromADC}. 
 
 \subsection{Simulation with sine wave signals}
 
