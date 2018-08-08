@@ -1,5 +1,7 @@
 \chapter{Digital filter}
 
+In this chapter, the design of the implemented filter is described, as well as the simulation results.
+
 \section{Design}
 
 The goal of this lab is to digitally filter a waveform sampled at 44.1kHz and downsample it to a frequency of $F_{sampling}=22.05$ kHz. To perform this subsampling, it is necessary that the signal is composed of frequencies smaller than the Nyquist frequency : 
@@ -41,7 +43,7 @@ where
 h_d(n) = h_d^*(n-N) = \frac{\pi}{2} sinc(\frac{\pi}{2} (n-N))
 \]
 
-The implemented filter can be found in the Verilog module \texttt{digital\_filter}. The order can be passed as parameter, so that the coefficients can be comuted accordingly. Initially, the cutoff frequency could also be set as parameter of type \texttt{real}. However, this data type is not supported by the synthesis. That is the reason why this parameter was removed and directly included in the coefficients calculation. The same goes for the coefficients which cannot be once computed and stored as \texttt{real}, and therefore need to be recomputing for each sample.
+The filter implemented in 24 bits can be found in the Verilog module \texttt{digital\_filter}. The order can be passed as parameter, so that the coefficients can be comuted accordingly. Initially, the cutoff frequency could also be set as parameter of type \texttt{real}. However, this data type is not supported by the synthesis. That is the reason why this parameter was removed and directly included in the coefficients calculation. The same goes for the coefficients which cannot be once computed and stored as \texttt{real}, and therefore need to be recomputing for each sample.
 
 \section{Evaluation}
 
@@ -51,9 +53,9 @@ The design is first evaluated in MATLAB, to check if the chosen architecture mee
 
 \begin{figure}[!h]%
 	\centering
-	\subfloat[Original signal]{{\includegraphics[scale=0.6]{images/Filter/input.jpg}}}%
+	\subfloat[Original signal]{{\includegraphics[scale=0.4]{images/Filter/input.jpg}}}%
 	\qquad
-	\subfloat[Filtered signal]{{\includegraphics[scale=0.6]{images/Filter/response.jpg}}}%
+	\subfloat[Filtered signal]{{\includegraphics[scale=0.4]{images/Filter/response.jpg}}}%
 	\caption{Spectrum (in magnitude) of the original and filtered signals}%
 	\label{fig:filterMatlabTestbench}%
 \end{figure}
@@ -62,7 +64,7 @@ As expected, the chosen filter has a low pass behavior with a cutoff frequency $
 
 \subsection{Verilog implementation}
 
-To evaluate the performance of the digital filter implemented in Verilog, a simulation is performed in Cadence. The testbench used for this purpose is to be found in \texttt{digital\_filter\_Testbench2}, and the corresponding schematic is provided in figure \ref{fig:filterTestbench}. it consists of a sum of sinus waveforms of 500Hz and 20 kHz respectively. For this simulation, an ideal ADC \texttt{adc\_ideal} has been additionally implemented, to convert the analog input signal to a digital one before filtering. The values for the different parameters are given in the table \ref{table:filterTestbench}. The order of the filter is deliberately small, in order to prevent a too important delay.\\
+To evaluate the performance of the digital filter implemented in Verilog, a simulation is performed in Cadence. The testbench used for this purpose is to be found in \texttt{digital\_filter\_Testbench2}, and the corresponding schematic is provided in figure \ref{fig:filterTestbench}. It consists of a sum of sinus waveforms of 500Hz and 20 kHz respectively, with an offset of 2.5V, and an amplitude of 1V and 1.5V respectively. For this simulation, an ideal ADC \texttt{adc\_ideal} has been additionally implemented, to convert the analog input signal to a digital one before filtering. The values for the different parameters are given in the table \ref{table:filterTestbench}. The order of the filter is deliberately small, in order to prevent a too important delay.\\
 The obtained transient waveforms and spectrums are provided respectively in figures \ref{fig:filterCadenceTestbenchTransient} and \ref{fig:filterCadenceTestbenchSpectrum}. The ENOB, SINAD and SNR values are listed in the table \ref{table:filterValues}.
  
 

@@ -1,18 +1,139 @@
 \chapter{Downsampling circuit}
 
-\section{Design}
+After implementing the digital filter and the Analog-Digital and Digital Analog converters, all components can be integrated together in a downsampling circuit for WAV signals. The corresponding results are described in this chapter.
 
-\subsection{WAV-Reader/WAV-Writer}
-\subsection{Downsampling}
+\section{Simple downsampling circuit}
 
-\section{Performance Evaluation}
+The downsampling circuit is composed of the digital filter combined with a register, which can be found in the Verilog module \texttt{downsampling}. The task of this register is to keep only every second sample provided by the filter, in order to reduce the sampling frequency from 44.1 kHz to 22.05 kHz.\\
+\\
+To be able to simulate the design with WAV audio signals, additional components such as a WAV reader and a WAV writer are required. Both corresponding cell views are to be found respectively in the modules \texttt{WAV\_Reader} and \texttt{WAV\_Writer}. As the read/written signals are encoded on 24 bits, as well as the filter and downsampling circuit, the connection between the 16-bit ADC and the other components is performed by a converter 24 to 16 bits (respectively 16 to 24 bits), which discards the eigth MSBs (respectively set the eight MSBs to zero). The corresponding modules are to be found respectively in \texttt{converterToDAC} and \texttt{converterFromADC}. 
 
-\subsection{Downsampling testbench}
+\subsection{Simulation with sine wave signals}
 
-\subsubsection{With sinus waveforms}
+For this test, the input signal is a voltage source of two added sinus waves with a DC offset of 2.5V, respective frequencies of 500 Hz and 20 kHz, and respective amplitudes of 1V and 1.5V. The corresponding schematic is provided figure \ref{fig:downsamplingSinusTestbench}. Here again, an ideal ADC is used to convert the input voltage in a digital signal. The goal of this simulation is to identify the effect of the digital filter on the input signal. Therefore, the results are stored as WAV files by means of the WAV writer, and analyzed in MATLAB. The obtained waveforms and spectrums are represented on figures \ref{fig:downsamplingSinusSignal} and \ref{fig:downsamplingSinusSpectrum}.\\
+\\
+\textbf{Explanation bla bla bla .... (ich mache es am Mittwoch).}
 
-\subsubsection{With audio signals}
 
-\subsection{Integration of ADC and DAC}
+\begin{figure}[!h]
+	\centering 
+	\includegraphics[scale=0.54]{images/DownsamplingCircuit/wav_downsampling_comparison.png}
+	\caption{Downsampling circuit testbench (sinusoidal input voltage)}
+	\label{fig:downsamplingSinusTestbench}
+\end{figure} 
+
+\begin{figure}[!h]%
+	\centering
+	\subfloat[Original signal]{{\includegraphics[scale=0.31]{images/DownsamplingCircuit/originalSignal.png}}}%
+	\qquad
+	\subfloat[Downsampled signal without filter]{{\includegraphics[scale=0.30]{images/DownsamplingCircuit/ohneFilterSignal.png}}}%
+	\qquad
+	\subfloat[Downsampled signal with filter]{{\includegraphics[scale=0.31]{images/DownsamplingCircuit/mitFilterSignal.png}}}%
+	\caption{Transient simulation of the original and downsampled signals}%
+	\label{fig:downsamplingSinusSignal}%
+\end{figure}
+
+\begin{figure}[!h]%
+	\centering
+	\subfloat[Original signal]{{\includegraphics[scale=0.31]{images/DownsamplingCircuit/originalSpectrum.png}}}%
+	\qquad
+	\subfloat[Downsampled signal without filter]{{\includegraphics[scale=0.31]{images/DownsamplingCircuit/ohneFilterSpectrum.png}}}%
+	\qquad
+	\subfloat[Downsampled signal with filter]{{\includegraphics[scale=0.31]{images/DownsamplingCircuit/mitFilterSpectrum.png}}}%
+	\caption{Spectrums (in magnitude) of the original and downsampled signals}%
+	\label{fig:downsamplingSinusSpectrum}%
+\end{figure}
+
+\subsection{Simulation with audio signals}
+
+\textbf{Text bla bla bla (ich mache es am Mittwoch).Ich habe die bilder fuer den zweiten Signal (Ex 2) rausgenommen, sonst waere es zu viele Bilder gewesen... Soll ich eher ein Channel oder doch lieber den zweiten Signal weglassen?}
+
+\begin{figure}[!h]%
+	\centering
+	\subfloat[Input signal (L and R channels)]{
+		\begin{minipage}{\linewidth}
+			\includegraphics[scale=0.45]{images/DownsamplingCircuit/inputL.png}
+			\includegraphics[scale=0.45]{images/DownsamplingCircuit/inputR.png}
+		\end{minipage}
+	}%
+	\qquad
+	\subfloat[Downsampled signal (L and R channels)]{
+		\begin{minipage}{\linewidth}
+			\includegraphics[scale=0.45]{images/DownsamplingCircuit/outputL.png}
+			\includegraphics[scale=0.45]{images/DownsamplingCircuit/outputR.png}
+		\end{minipage}
+	}%
+	\caption{Transient waveforms of the original and downsampled signals (Example 1)}%
+	\label{fig:downsamplingWavEx1Signal}%
+\end{figure}
+
+\begin{figure}[!h]%
+	\centering
+	\subfloat[Input signal (L and R channels)]{
+		\begin{minipage}{\linewidth}
+			\includegraphics[scale=0.45]{images/DownsamplingCircuit/inLFFT.png}
+			\includegraphics[scale=0.45]{images/DownsamplingCircuit/inRFFT.png}
+		\end{minipage}
+	}%
+	\qquad
+	\subfloat[Downsampled signal (L and R channels)]{
+		\begin{minipage}{\linewidth}
+			\includegraphics[scale=0.45]{images/DownsamplingCircuit/outLFFT.png}
+			\includegraphics[scale=0.45]{images/DownsamplingCircuit/outRFFT.png}
+		\end{minipage}
+	}%
+	\caption{Spectrum (in magnitude) of the original and downsampled signals (Example 1)}%
+	\label{fig:downsamplingWavEx1Spectrum}%
+\end{figure}
+
+%\begin{figure}[!h]%
+%	\centering
+%	\subfloat[Input signal (L and R channels)]{
+%		\begin{minipage}{\linewidth}
+%			\includegraphics[scale=0.45]{images/DownsamplingCircuit/inputLEx2.png}
+%			\includegraphics[scale=0.45]{images/DownsamplingCircuit/inputREx2.png}
+%		\end{minipage}
+%	}%
+%	\qquad
+%	\subfloat[Downsampled signal (L and R channels)]{
+%		\begin{minipage}{\linewidth}
+%			\includegraphics[scale=0.45]{images/DownsamplingCircuit/outputLEx2.png}
+%			\includegraphics[scale=0.45]{images/DownsamplingCircuit/outputREx2.png}
+%		\end{minipage}
+%	}%
+%	\caption{Transient waveforms of the original and downsampled signals}%
+%	\label{fig:downsamplingWavEx2Signal}%
+%\end{figure}
+
+%\begin{figure}[!h]%
+%	\centering
+%	\subfloat[Input signal (L and R channels)]{
+%		\begin{minipage}{\linewidth}
+%			\includegraphics[scale=0.45]{images/DownsamplingCircuit/inLFFTEx2.png}
+%			\includegraphics[scale=0.45]{images/DownsamplingCircuit/inRFFTEx2.png}
+%		\end{minipage}
+%	}%
+%	\qquad
+%	\subfloat[Downsampled signal (L and R channels)]{
+%		\begin{minipage}{\linewidth}
+%			\includegraphics[scale=0.45]{images/DownsamplingCircuit/outLFFTEx2.png}
+%			\includegraphics[scale=0.45]{images/DownsamplingCircuit/outRFFTEx2.png}
+%		\end{minipage}
+%	}%
+%	\caption{Spectrum (in magnitude) of the original and downsampled signals (Example 2)}%
+%	\label{fig:downsamplingWavEx2Spectrum}%
+%\end{figure}
+
+
+\section{Integration of ADC and DAC}
+
+\textbf{Text bla bla bla (ich mache es am Mittwoch)}
+
+\begin{figure}[!h]
+	\centering 
+	\includegraphics[scale=0.27]{images/DownsamplingCircuit/wav_downsampling.png}
+	\caption{Downsampling circuit testbench (with real ADC)}
+	\label{fig:downsamplingADCTestbench}
+\end{figure}
 
 
