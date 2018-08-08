@@ -43,13 +43,13 @@ where
 h_d(n) = h_d^*(n-N) = \frac{\pi}{2} sinc(\frac{\pi}{2} (n-N))
 \]
 
-The filter implemented in 24 bits can be found in the Verilog module \texttt{digital\_filter}. The order can be passed as parameter, so that the coefficients can be comuted accordingly. Initially, the cutoff frequency could also be set as parameter of type \texttt{real}. However, this data type is not supported by the synthesis. That is the reason why this parameter was removed and directly included in the coefficients calculation. The same goes for the coefficients which cannot be once computed and stored as \texttt{real}, and therefore need to be recomputing for each sample.
+The filter implemented in 24 bits can be found in the Verilog module \texttt{digital\_filter}. The order can be passed as parameter, so that the coefficients can be comuted accordingly. Initially, the cutoff frequency could also be set as parameter of type \texttt{real}. However, this data type is not supported by the synthesis. That is the reason why this parameter was removed and directly included in the coefficients calculation. The same goes for the coefficients which cannot be once computed and stored as \texttt{real}, and therefore need to be recomputed for each sample.
 
 \section{Evaluation}
 
 \subsection{Theory}
 
-The design is first evaluated in MATLAB, to check if the chosen architecture meets the task requirements. For this evaluation, the testbench consists of a sum of identical sinus waveforms of frequencies equally distributed between 0 and 20kHz, with a step of 1kHz. The resulting spectrums are given on figure \ref{fig:filterMatlabTestbench}. For the simulation, the order of the filter is fixed to 150.
+The design was first evaluated in MATLAB, to check if the chosen architecture meets the task requirements. For this evaluation, the testbench consists of a sum of identical sinus waveforms of frequencies equally distributed between 0 and 20kHz, with a step of 1kHz. The resulting spectrums are given on figure \ref{fig:filterMatlabTestbench}. For the simulation, the order of the filter is fixed to 150.
 
 \begin{figure}[!h]%
 	\centering
@@ -64,7 +64,7 @@ As expected, the chosen filter has a low pass behavior with a cutoff frequency $
 
 \subsection{Verilog implementation}
 
-To evaluate the performance of the digital filter implemented in Verilog, a simulation is performed in Cadence. The testbench used for this purpose is to be found in \texttt{digital\_filter\_Testbench2}, and the corresponding schematic is provided in figure \ref{fig:filterTestbench}. It consists of a sum of sinus waveforms of 500Hz and 20 kHz respectively, with an offset of 2.5V, and an amplitude of 1V and 1.5V respectively. For this simulation, an ideal ADC \texttt{adc\_ideal} has been additionally implemented, to convert the analog input signal to a digital one before filtering. The values for the different parameters are given in the table \ref{table:filterTestbench}. The order of the filter is deliberately small, in order to prevent a too important delay.\\
+To evaluate the performance of the digital filter implemented in Verilog, we performed a simulation in Cadence. The testbench used for this purpose can be found in \texttt{digital\_filter\_Testbench2}, and the corresponding schematic is provided in figure \ref{fig:filterTestbench}. It consists of a sum of sinus waveforms of 500Hz and 20 kHz respectively, with an offset of 2.5V, and an amplitude of 1V and 1.5V respectively. For this simulation, an ideal ADC \texttt{adc\_ideal} has been additionally implemented, to convert the analog input signal to a digital one before filtering. The values for the different parameters are given in the table \ref{table:filterTestbench}. The order of the filter is deliberately small, in order to prevent a too high delay.\\
 The obtained transient waveforms and spectrums are provided respectively in figures \ref{fig:filterCadenceTestbenchTransient} and \ref{fig:filterCadenceTestbenchSpectrum}. The ENOB, SINAD and SNR values are listed in the table \ref{table:filterValues}.
  
 
@@ -117,7 +117,7 @@ The obtained transient waveforms and spectrums are provided respectively in figu
 	\label{table:filterValues}
 \end{table}
 
-Surprisingly, the filtered signal contains more noise as the input signal. This may be due to the ADC which is working only at 44.1 kHz and may not capture the whole complexity of the input signal. Moreover, the relatively small order does not allow the filter to have a sharp cutoff of the higher frequencies.
+As you can see, the filtered signal contains more noise as the input signal. This may be due to the ADC which is working only at 44.1 kHz and may not capture the whole complexity of the input signal. Moreover, the relatively small order does not allow the filter to have a sharp cutoff of the higher frequencies.
 
 
 \section{Synthesis}
@@ -145,8 +145,8 @@ The synthesis of the digital filter described above is performed using Synopsis 
 		 1 Hz & $10^{9}$ & ~$10^{9}$ & 23018.760042 & 47767.179669 \\
 		\hline
 	\end{tabular}
+	\caption{Filter synthesis statistics}	
 	\label{table:synthesisStats}
-	\caption{Filter synthesis statistics}
 \end{table} 
 
 As shown in table \ref{table:synthesisStats}, the maximal clock frequency of the implemented filter is \textbf{333 MHz} (that is, a minimal clock period of \textbf{3 ns}). As expected, the required (cell and total) area is generally increasing with the frequency. Thus, the minimal total area is obtained for a frequency of \textbf{100 MHz}.
