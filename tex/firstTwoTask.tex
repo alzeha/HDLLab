@@ -1,10 +1,11 @@
 \chapter{Basic components}
 
-In this chapter, the first tutorial tasks, which consists in implementing an operational amplifier schematic in Cadence and a clock generator in Verilog. 
+In this chapter, the solutions of the first tutorial tasks, which consisted in implementing an operational amplifier schematic in Cadence and a clock generator in Verilog, are described.
 
 \section{Operational amplifier}
 
-The first task is to implement an operational amplifier. The schematics of the differential stage and bias circuit of the OA are provided. The implemented amplifier is to be found in the file (\texttt{OpAmp}). The simulation results given on figure \ref{fig:opAmpSimulation} are obtained in Cadence with the following testbench (table \ref{table:opAmpTestbench}): 
+The first task was to implement an operational amplifier. The schematics of the differential stage and bias circuit of the OpAmp were provided. The implemented amplifier can be found in the file (\texttt{OpAmp}). The simulation results given in figure ~\ref{fig:opAmpSimulation} are obtained in Cadence with the following testbench (Table 
+~\ref{table:opAmpTestbench}): 
 
 \begin{table}[!h]
 	\centering
@@ -17,28 +18,28 @@ The first task is to implement an operational amplifier. The schematics of the d
 		$V_{+}$ (In) & pulse & AC=500mV, DC=0V, f=1MHz \\
 		\hline
 	\end{tabular}
-	\label{table:opAmpTestbench}
 	\caption{Operational amplifier testbench}
+	\label{table:opAmpTestbench}
 \end{table}
 
-As expected, the operational amplifier is driven in a saturated operating regime and behaves as a comparator.
+As expected, the operational amplifier behaves as a comparator.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.65]{images/BasicComponents/Task1OpAmpSimulation.png}
-	\label{fig:opAmpSimulation}
 	\caption{Operational amplifier simulation}
+	\label{fig:opAmpSimulation}
 \end{figure} 
 
 \section{Clock generator}
 
-The second task consists in implementing a clock generator (\texttt{clkGen}) in Verilog. The Verilog code is provided. The results of the simulation in ModelSim are given on figure \ref{fig:clkGenSimulation}.
+The second task consisted in implementing a clock generator (\texttt{clkGen}) in Verilog. The Verilog code was provided. The results of the simulation in ModelSim are given in figure \ref{fig:clkGenSimulation}.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.6]{images/BasicComponents/Task2ClkGenSimulation.png}
-	\label{fig:clkGenSimulation}
 	\caption{Clock generator simulation}
+	\label{fig:clkGenSimulation}	
 \end{figure}
 
-For more configurability, an additional parameter \texttt{FKHZ} is introduced, which corresponds to the desired frequency in kHz.
+For more configurability, an additional parameter \texttt{FKHZ} was introduced, which corresponds to the desired frequency in kHz.
