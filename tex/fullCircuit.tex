@@ -12,8 +12,6 @@ To be able to simulate the design with WAV audio signals, additional components 
 
 For this test, the input signal is a voltage source of two added sinus waves with a DC offset of 2.5V, respective frequencies of 500 Hz and 20 kHz, and respective amplitudes of 1V and 1.5V. The corresponding schematic is provided figure \ref{fig:downsamplingSinusTestbench}. Here again, an ideal ADC is used to convert the input voltage in a digital signal. The goal of this simulation is to identify the effect of the digital filter on the input signal. Therefore, the results are stored as WAV files by means of the WAV writer, and analyzed in MATLAB. The obtained waveforms and spectrums are represented on figures \ref{fig:downsamplingSinusSignal} and \ref{fig:downsamplingSinusSpectrum}.\\
 \\
-\textbf{Explanation bla bla bla .... (ich mache es am Mittwoch).}
-
 
 \begin{figure}[!h]
 	\centering 
@@ -44,47 +42,51 @@ For this test, the input signal is a voltage source of two added sinus waves wit
 	\label{fig:downsamplingSinusSpectrum}%
 \end{figure}
 
-\subsection{Simulation with audio signals}
+After hearing both sampled signals, we could notice that the filtered one is a more bass sound that the other one. This confirms the fact the filter has damped the higher frequency.
 
-\textbf{Text bla bla bla (ich mache es am Mittwoch).Ich habe die bilder fuer den zweiten Signal (Ex 2) rausgenommen, sonst waere es zu viele Bilder gewesen... Soll ich eher ein Channel oder doch lieber den zweiten Signal weglassen?}
+%\subsection{Simulation with audio signals}
 
-\begin{figure}[!h]%
-	\centering
-	\subfloat[Input signal (L and R channels)]{
-		\begin{minipage}{\linewidth}
-			\includegraphics[scale=0.45]{images/DownsamplingCircuit/inputL.png}
-			\includegraphics[scale=0.45]{images/DownsamplingCircuit/inputR.png}
-		\end{minipage}
-	}%
-	\qquad
-	\subfloat[Downsampled signal (L and R channels)]{
-		\begin{minipage}{\linewidth}
-			\includegraphics[scale=0.45]{images/DownsamplingCircuit/outputL.png}
-			\includegraphics[scale=0.45]{images/DownsamplingCircuit/outputR.png}
-		\end{minipage}
-	}%
-	\caption{Transient waveforms of the original and downsampled signals (Example 1)}%
-	\label{fig:downsamplingWavEx1Signal}%
-\end{figure}
+%For this test, the input signal is a stereo WAV signal, containing two channels and a wide range of harmonics. The original and the filtered/sampled signal are compared on figures ~\ref{fig:downsamplingWavEx1Signal} and ~\ref{fig:downsamplingWavEx1Spectrum} . The testbench used here is similar to the one described in the previous part.
 
-\begin{figure}[!h]%
-	\centering
-	\subfloat[Input signal (L and R channels)]{
-		\begin{minipage}{\linewidth}
-			\includegraphics[scale=0.45]{images/DownsamplingCircuit/inLFFT.png}
-			\includegraphics[scale=0.45]{images/DownsamplingCircuit/inRFFT.png}
-		\end{minipage}
-	}%
-	\qquad
-	\subfloat[Downsampled signal (L and R channels)]{
-		\begin{minipage}{\linewidth}
-			\includegraphics[scale=0.45]{images/DownsamplingCircuit/outLFFT.png}
-			\includegraphics[scale=0.45]{images/DownsamplingCircuit/outRFFT.png}
-		\end{minipage}
-	}%
-	\caption{Spectrum (in magnitude) of the original and downsampled signals (Example 1)}%
-	\label{fig:downsamplingWavEx1Spectrum}%
-\end{figure}
+%\begin{figure}[!h]%
+%	\centering
+%	\subfloat[Input signal (L and R channels)]{
+%		\begin{minipage}{\linewidth}
+%			\includegraphics[scale=0.45]{images/DownsamplingCircuit/inputL.png}
+%			\includegraphics[scale=0.45]{images/DownsamplingCircuit/inputR.png}
+%		\end{minipage}
+%	}%
+%	\qquad
+%	\subfloat[Downsampled signal (L and R channels)]{
+%		\begin{minipage}{\linewidth}
+%			%\includegraphics[scale=0.45]{images/DownsamplingCircuit/outputL.png}
+%			\includegraphics[scale=0.45]{images/DownsamplingCircuit/outputR.png}
+%		\end{minipage}
+%	}%
+%	\caption{Transient waveforms of the original and downsampled signals (Example 1)}%
+%	\label{fig:downsamplingWavEx1Signal}%
+%\end{figure}
+
+%\begin{figure}[!h]%
+%	\centering
+%	\subfloat[Input signal (L and R channels)]{
+%		\begin{minipage}{\linewidth}
+%			\includegraphics[scale=0.45]{images/DownsamplingCircuit/inLFFT.png}
+%			\includegraphics[scale=0.45]{images/DownsamplingCircuit/inRFFT.png}
+%		\end{minipage}
+%	}%
+%	\qquad
+%	\subfloat[Downsampled signal (L and R channels)]{
+%		\begin{minipage}{\linewidth}
+%			\includegraphics[scale=0.45]{images/DownsamplingCircuit/outLFFT.png}
+%			\includegraphics[scale=0.45]{images/DownsamplingCircuit/outRFFT.png}
+%		\end{minipage}
+%	}%
+%	\caption{Spectrum (in magnitude) of the original and downsampled signals (Example 1)}%
+%	\label{fig:downsamplingWavEx1Spectrum}%
+%\end{figure}
+
+%Overall, the sampled signal is quite similar to the original one, as well in terms of transient evolution as of frequency spectrums. Nevertheless, it is worth noting that the filter generates an offset of about -0.25V. This may be due to a not well fitted filter gain/coefficients, which attenuate a bit the offset component and shift the whole output signal.
 
 %\begin{figure}[!h]%
 %	\centering
@@ -125,10 +127,9 @@ For this test, the input signal is a voltage source of two added sinus waves wit
 %\end{figure}
 
 
-\section{Integration of ADC and DAC}
+\section{Integration of the implemented ADC}
 
-\textbf{Text bla bla bla (ich mache es am Mittwoch)}
-
+For this test, the ideal ADC is replaced by the extended ADC described in the second chapter. The DAC is also required to convert the digital input to an analog one for the ADC. The corresponding testbench is given in figure ~\ref{fig:downsamplingADCTestbench} The input signal is a stereo WAV signal, containing two channels and a wide range of harmonics. The original and the filtered/sampled signal are compared on figures ~\ref{fig:downsamplingWavEx1Signal} and ~\ref{fig:downsamplingWavEx1Spectrum}. 
 \begin{figure}[!h]
 	\centering 
 	\includegraphics[scale=0.27]{images/DownsamplingCircuit/wav_downsampling.png}
@@ -137,3 +138,43 @@ For this test, the input signal is a voltage source of two added sinus waves wit
 \end{figure}
 
 
+
+\begin{figure}[!h]%
+	\centering
+	\subfloat[Input signal (L and R channels)]{
+		\begin{minipage}{\linewidth}
+			\includegraphics[scale=0.45]{images/DownsamplingCircuit/inputL.png}
+			\includegraphics[scale=0.45]{images/DownsamplingCircuit/inputR.png}
+		\end{minipage}
+	}%
+	\qquad
+	\subfloat[Downsampled signal (L and R channels)]{
+		\begin{minipage}{\linewidth}
+			\includegraphics[scale=0.45]{images/DownsamplingCircuit/outputL.png}
+			\includegraphics[scale=0.45]{images/DownsamplingCircuit/outputR.png}
+		\end{minipage}
+}%
+	\caption{Transient waveforms of the original and downsampled signals (Example 1)}%
+	\label{fig:downsamplingWavEx1Signal}%
+\end{figure}
+
+\begin{figure}[!h]%
+	\centering
+	\subfloat[Input signal (L and R channels)]{
+		\begin{minipage}{\linewidth}
+			\includegraphics[scale=0.45]{images/DownsamplingCircuit/inLFFT.png}
+			\includegraphics[scale=0.45]{images/DownsamplingCircuit/inRFFT.png}
+		\end{minipage}
+	}%
+	\qquad
+	\subfloat[Downsampled signal (L and R channels)]{
+		\begin{minipage}{\linewidth}
+			\includegraphics[scale=0.45]{images/DownsamplingCircuit/outLFFT.png}
+			\includegraphics[scale=0.45]{images/DownsamplingCircuit/outRFFT.png}
+		\end{minipage}
+	}%
+	\caption{Spectrum (in magnitude) of the original and downsampled signals (Example 1)}%
+	\label{fig:downsamplingWavEx1Spectrum}%
+\end{figure}
+
+Overall, the sampled signal is quite similar to the original one, as well in terms of transient evolution as of frequency spectrums. The ADC does not seem to affect particularly the overall form of the input signal. Nevertheless, it is worth noting that the filter generates an offset of about -0.25V. This may be due to a not well fitted filter gain/coefficients, which attenuate a bit the offset component and shift the whole output signal. This can also be explained by the fact that the ADC tends to slightly shift the signal, because of little springs occurring at the signal extrema.
