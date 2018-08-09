@@ -6,9 +6,9 @@ In this chapter two different versions of our ADC are getting described.
 
 The task was to implement an 16bit ADC. We decided to implement a tracking ADC, the idea is shown in Figure ~\ref{fig:wholeADC}. This kind of ADC has different advantages, e.g. that it is choosable how good the approximation is by setting the correct frequency of the clock. Also it matches the requirements of using the DAC and the OpAmp. Our ADC is linear to the input value, which means, you can multiply the digital value with an fixed value, which depends on V\textsubscript{dd}, to get an approximation of the input value. E.g. if you are using 1.2V as V\textsubscript{dd}, you can calculate 
 
-\begin{equation}
+\[
 	V_{approx} = \frac{1.2V}{2^{16} - 1} \cdot digitalValue
-\end{equation}
+\]
 
 to get the approximation of the input.
 
@@ -40,9 +40,9 @@ The interesting part of the design is the part of the ADC called ADCForward. Thi
 
 As result of the evaluation task, we got the diagram provided in figure ~\ref{fig:simpleAdcEvaluation}, using a stepwidth of 4500. The requested values can be found at table ~\ref{table:valuesSimpleADC}. Due to Cadence performance problems, the differential and integral non-linearity (DNL/INL) of the ADC could not be evaluated.
 
-\begin{figure}[h]
+\begin{figure}[!h]
 	\centering
-	\includegraphics[scale=0.5]{images/adc/10KHzInputStepWidth4500.png}
+	\includegraphics[scale=0.475]{images/adc/10KHzInputStepWidth4500.png}
 	\caption{10kHz input and stepwidth 4500}
 	\label{fig:simpleAdcEvaluation}
 \end{figure}
@@ -63,9 +63,11 @@ As result of the evaluation task, we got the diagram provided in figure ~\ref{fi
 	\label{table:valuesSimpleADC}
 \end{table}
 
+\newpage
+
 \section{Second Implementation}
 
-The second implementation does not need to get a stepwidth, but calculates its own stepwidth at runtime. It is more complex, but usefull, if you do not know anything about the incoming signal.
+The second implementation does not need to get a stepwidth, but calculates its own stepwidth at runtime. It is more complex, but useful, if you do not know anything about the incoming signal.
 
 \subsection{Design}
 Also here, the interesting part of the ADC is the forward path, which is called ADCForwardExtended here. This second implementation is shown in figure ~\ref{fig:extendedForward}. You can see that this forward path is divided in three steps. First, new stepwidths are getting calculated from the last choosen stepwidth. After that, the new possible values are computed and the stepwidth chooser selects the one, which is fitting best. It is also possible that the stepwdith chooser decides, that none of them are fitting good, so it keeps the last digital value and returns as used stepwidth zero.
@@ -85,7 +87,7 @@ The simulation results are shown in figure ~\ref{fig:extendedAdcEvaluation}. The
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.5]{images/adc/input10kHzExtended.png}
+	\includegraphics[scale=0.6]{images/adc/input10kHzExtended.png}
 	\caption{10kHz input for the extended ADC}
 	\label{fig:extendedAdcEvaluation}
 \end{figure}
